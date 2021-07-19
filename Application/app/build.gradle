@@ -45,6 +45,18 @@ dependencies {
 
     def nav_version = "2.3.5"
 
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+
+    //reactive
+    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+    implementation "androidx.room:room-rxjava2:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1"
+    implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
+
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
