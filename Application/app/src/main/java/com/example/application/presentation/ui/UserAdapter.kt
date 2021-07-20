@@ -1,4 +1,4 @@
-package com.example.application.ui
+package com.example.application.presentation.ui
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +10,13 @@ import com.example.application.R
 import com.example.application.databinding.ItemUserBinding
 import com.example.application.domain.model.User
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>(), OnUserClickListener {
 
     private var listData = ArrayList<User>()
-    var onItemClick: ((User) -> Unit)? = null
+
 
     fun setData(newListData: List<User>?){
         if (newListData == null) return
-        Log.e("User Adapter", "newListData: $newListData")
         listData.clear()
         listData.addAll(newListData)
         notifyDataSetChanged()
@@ -33,14 +32,20 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
                 tvName.text = data.username
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
         UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false))
+
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listData[position])
     }
 
     override fun getItemCount() = listData.size
+
+    override fun onUserClicked(position: Int) {
+        TODO("Not yet implemented")
+    }
 }

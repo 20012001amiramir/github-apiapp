@@ -1,10 +1,10 @@
-package com.kharismarizqii.githubuserapp.core.ui
+package com.example.application.presentation.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kharismarizqii.githubuserapp.core.domain.usecase.UserUseCase
 import com.example.application.di.AppScope
-import com.kharismarizqii.githubuserapp.user.UserViewModel
+import com.example.application.domain.usecase.UserUseCase
+import com.example.application.presentation.viewmodel.UserViewModel
 import javax.inject.Inject
 
 @AppScope

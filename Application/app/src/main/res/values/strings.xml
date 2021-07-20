@@ -1,7 +1,7 @@
 <resources>
     <string name="username">UserName</string>
     <string name="get_repositories">Get repositories</string>
-    <string name="app_name">Github App</string>
+    <string name="app_name">Application</string>
     <string name="search">Search</string>
     <string name="content_description_search">Menu Search</string>
     <string name="more">More</string>
