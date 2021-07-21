@@ -10,7 +10,7 @@ import com.example.application.R
 import com.example.application.databinding.ItemUserBinding
 import com.example.application.domain.model.User
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>(), OnUserClickListener {
+class UserAdapter(private val onUserClickListener: OnUserClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
     private var listData = ArrayList<User>()
 
@@ -41,11 +41,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>(), OnUserCl
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listData[position])
+        holder.itemView.setOnClickListener {
+            onUserClickListener.onUserClicked((position))
+        }
     }
 
     override fun getItemCount() = listData.size
 
-    override fun onUserClicked(position: Int) {
-        TODO("Not yet implemented")
-    }
 }

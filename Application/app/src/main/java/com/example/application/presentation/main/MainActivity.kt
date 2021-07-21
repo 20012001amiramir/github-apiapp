@@ -8,12 +8,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.application.App
 import com.example.application.R
 import com.example.application.data.Resource
 import com.example.application.databinding.AppBarBinding
+import com.example.application.presentation.ui.OnUserClickListener
 import com.example.application.presentation.ui.UserAdapter
 import com.example.application.presentation.viewmodel.UserViewModel
 import com.example.application.presentation.ui.ViewModelFactory
@@ -23,7 +25,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnUserClickListener {
 
     @Inject
     lateinit var factory: ViewModelFactory
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = AppBarBinding.inflate(layoutInflater)
         val view = binding.root
-        userAdapter = UserAdapter()
+        userAdapter = UserAdapter(this)
         setContentView(view)
         with(binding.rvUser) {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -97,5 +99,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onUserClicked(position: Int) {
+        Toast.makeText(this, "clicked $position", Toast.LENGTH_LONG).show()
     }
 }
