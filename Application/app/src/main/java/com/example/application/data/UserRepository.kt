@@ -6,7 +6,7 @@ import com.example.application.data.source.remote.RemoteDataSource
 import com.example.application.data.source.remote.network.ApiResponse
 import com.example.application.domain.model.User
 import com.example.application.domain.repository.IUserRepository
-import com.example.application.data.source.remote.response.UserResponse
+import com.example.application.data.source.remote.response.user.UserResponse
 import com.example.application.domain.utils.AppExecutors
 import com.example.application.domain.utils.DataMapper
 import io.reactivex.Flowable

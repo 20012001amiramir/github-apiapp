@@ -2,6 +2,7 @@ package com.example.application.data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.application.data.source.local.room.RepositoryDao
 import com.example.application.data.source.local.room.UserDao
 import com.example.application.data.source.local.room.UserDatabase
 import dagger.Module
@@ -20,4 +21,8 @@ class DatabaseModule {
 
     @Provides
     fun provideUserDao(database: UserDatabase) : UserDao = database.userDao()
+
+    @Provides
+    fun provideRepositoryDao(database: UserDatabase) : RepositoryDao = database.repositoryDao()
+
 }

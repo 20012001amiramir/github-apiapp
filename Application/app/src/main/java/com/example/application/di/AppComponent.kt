@@ -1,7 +1,10 @@
 package com.example.application.di
 
+import android.app.Activity
 import com.example.application.data.di.CoreComponent
-import com.example.application.presentation.main.MainActivity
+import com.example.application.data.di.RepositoryModule
+import com.example.application.presentation.ui.repository.RepositoriesActivity
+import com.example.application.presentation.ui.user.UserActivity
 import dagger.Component
 
 
@@ -15,6 +18,6 @@ interface AppComponent {
     interface Factory{
         fun create(coreComponent: CoreComponent): AppComponent
     }
-
-    fun inject(activity: MainActivity)
+    fun injectR(activity: RepositoriesActivity)
+    fun injectU(activity: UserActivity)
 }

@@ -1,6 +1,5 @@
-package com.example.application.data.source.remote.response
+package com.example.application.data.source.remote.response.user
 
-import com.example.application.data.source.remote.response.UserResponse
 import com.google.gson.annotations.SerializedName
 
 data class UserListResponse(

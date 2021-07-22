@@ -8,11 +8,8 @@ import dagger.Binds
 import dagger.Module
 
 @Module(includes = [NetworkModule::class, DatabaseModule::class])
-abstract class RepositoryModule {
-
-    @Binds
-    abstract fun provideUserRepository(userRepository: UserRepository): IUserRepository
-
+abstract class RepositoryRepositoryModule {
+    
     @Binds
     abstract fun provideRepositoryRepository(RepositoryRepository: RepositoryRepository): IRepositoryRepository
 }

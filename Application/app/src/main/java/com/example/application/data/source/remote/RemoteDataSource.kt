@@ -3,7 +3,8 @@ package com.example.application.data.source.remote
 import android.annotation.SuppressLint
 import com.example.application.data.source.remote.network.ApiResponse
 import com.example.application.data.source.remote.network.ApiService
-import com.example.application.data.source.remote.response.UserResponse
+import com.example.application.data.source.remote.response.repositories.RepositoryResponse
+import com.example.application.data.source.remote.response.user.UserResponse
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +29,24 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             .subscribe({ response ->
                 val dataArray = response.list
                 resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+            }, { error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                Timber.tag("RemoteDataSource").e(error.toString())
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+    @SuppressLint("CheckResult")
+    fun getRepositories(q: String): Flowable<ApiResponse<List<RepositoryResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<RepositoryResponse>>>()
+
+        val client = apiService.getRepo(q)
+
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                resultData.onNext(if (response.isNotEmpty()) ApiResponse.Success(response) else ApiResponse.Empty)
             }, { error ->
                 resultData.onNext(ApiResponse.Error(error.message.toString()))
                 Timber.tag("RemoteDataSource").e(error.toString())

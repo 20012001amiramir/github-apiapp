@@ -1,4 +1,4 @@
-package com.example.application.presentation.ui
+package com.example.application.presentation.ui.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,7 +8,7 @@ import com.example.application.presentation.viewmodel.UserViewModel
 import javax.inject.Inject
 
 @AppScope
-class ViewModelFactory @Inject constructor(private val userUseCase: UserUseCase) :
+class UserViewModelFactory @Inject constructor(private val userUseCase: UserUseCase) :
     ViewModelProvider.NewInstanceFactory() {
 
 

@@ -1,6 +1,7 @@
 package com.example.application.data.di
 
 import android.content.Context
+import com.example.application.domain.repository.IRepositoryRepository
 import com.example.application.domain.repository.IUserRepository
 import dagger.BindsInstance
 import dagger.Component
@@ -17,5 +18,7 @@ interface CoreComponent {
         fun create(@BindsInstance context: Context) : CoreComponent
     }
 
-    fun provideRepository() : IUserRepository
+    fun provideUserRepository() : IUserRepository
+
+    fun provideRepositoryRepository() : IRepositoryRepository
 }

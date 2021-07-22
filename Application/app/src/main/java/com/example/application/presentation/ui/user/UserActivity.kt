@@ -1,34 +1,33 @@
-package com.example.application.presentation.main
+package com.example.application.presentation.ui.user
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.application.App
 import com.example.application.R
 import com.example.application.data.Resource
 import com.example.application.databinding.AppBarBinding
-import com.example.application.presentation.ui.OnUserClickListener
-import com.example.application.presentation.ui.UserAdapter
+import com.example.application.domain.model.Repository
+import com.example.application.presentation.ui.repository.RepositoriesActivity
 import com.example.application.presentation.viewmodel.UserViewModel
-import com.example.application.presentation.ui.ViewModelFactory
 import com.jakewharton.rxbinding2.widget.RxSearchView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), OnUserClickListener {
 
+class UserActivity : AppCompatActivity(), OnUserClickListener {
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var factory: UserViewModelFactory
     private val viewModel: UserViewModel by viewModels {
         factory
     }
@@ -37,14 +36,14 @@ class MainActivity : AppCompatActivity(), OnUserClickListener {
     private lateinit var userAdapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as App).appComponent.inject(this)
+        (application as App).appComponent.injectU(this)
         super.onCreate(savedInstanceState)
         binding = AppBarBinding.inflate(layoutInflater)
         val view = binding.root
         userAdapter = UserAdapter(this)
         setContentView(view)
         with(binding.rvUser) {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@UserActivity)
             setHasFixedSize(true)
             adapter = userAdapter
         }
@@ -101,7 +100,9 @@ class MainActivity : AppCompatActivity(), OnUserClickListener {
         })
     }
 
-    override fun onUserClicked(position: Int) {
-        Toast.makeText(this, "clicked $position", Toast.LENGTH_LONG).show()
+    override fun onUserClicked(name: String) {
+        val intent = Intent(this, RepositoriesActivity::class.java)
+        intent.putExtra("name", name)
+        startActivity(intent)
     }
 }

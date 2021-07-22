@@ -1,6 +1,5 @@
-package com.example.application.presentation.ui
+package com.example.application.presentation.ui.user
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,7 @@ class UserAdapter(private val onUserClickListener: OnUserClickListener) : Recycl
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listData[position])
         holder.itemView.setOnClickListener {
-            onUserClickListener.onUserClicked((position))
+            onUserClickListener.onUserClicked((listData[position].username))
         }
     }
 

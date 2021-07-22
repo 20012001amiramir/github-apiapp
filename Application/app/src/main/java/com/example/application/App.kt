@@ -11,7 +11,8 @@ class App : Application(){
         DaggerCoreComponent.factory().create(applicationContext)
     }
 
-    val appComponent : AppComponent by lazy {
+    val appComponent :
+            AppComponent by lazy {
         DaggerAppComponent.factory().create(coreComponent)
     }
 }
