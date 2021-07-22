@@ -1,25 +1,25 @@
 package com.example.application.presentation.ui.repository
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.application.App
 import com.example.application.R
 import com.example.application.data.Resource
 import com.example.application.databinding.ActivityRepositoriesBinding
+import com.example.application.presentation.ui.repository.repositoryEntity.RepositoryDownloadActivity
 import com.example.application.presentation.viewmodel.RepositoryViewModel
-import com.jakewharton.rxbinding2.widget.RxAdapter
-import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class RepositoriesActivity : AppCompatActivity() {
+class RepositoriesActivity : AppCompatActivity(), OnRepositoryClickListener{
 
     @Inject
     lateinit var factoryRepository: RepositoryViewModelFactory
@@ -30,13 +30,13 @@ class RepositoriesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRepositoriesBinding
     private lateinit var repositoryAdapter: RepositoryAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as App).appComponent.injectR(this)
         super.onCreate(savedInstanceState)
+        setupBackButton()
         binding = ActivityRepositoriesBinding.inflate(layoutInflater)
         val view = binding.root
-        repositoryAdapter = RepositoryAdapter()
+        repositoryAdapter = RepositoryAdapter(this)
         setContentView(view)
         with(binding.rvUser) {
             layoutManager = LinearLayoutManager(this@RepositoriesActivity)
@@ -50,6 +50,21 @@ class RepositoriesActivity : AppCompatActivity() {
         }
         else Timber.e("Don't send name")
     }
+
+    private fun setupBackButton() {
+        (this as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                this.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun getRepositories(q: String) {
         viewModel.getRepositories(q).observe(this, { user ->
             Timber.e("${user.data}")
@@ -78,4 +93,12 @@ class RepositoriesActivity : AppCompatActivity() {
             }
         })
     }
+    override fun onRepositoryClicked(name: String, url: String, ownerName: String) {
+        val intent = Intent(this, RepositoryDownloadActivity::class.java)
+        intent.putExtra("name", name)
+        intent.putExtra("url", url)
+        intent.putExtra("ownerName", ownerName)
+        startActivity(intent)
+    }
+
 }

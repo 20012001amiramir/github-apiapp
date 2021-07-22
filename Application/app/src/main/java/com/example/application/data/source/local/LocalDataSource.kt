@@ -2,8 +2,8 @@ package com.example.application.data.source.local
 
 import com.example.application.data.source.local.entity.RepositoryEntity
 import com.example.application.data.source.local.entity.UserEntity
-import com.example.application.data.source.local.room.RepositoryDao
-import com.example.application.data.source.local.room.UserDao
+import com.example.application.data.source.local.room.dao.RepositoryDao
+import com.example.application.data.source.local.room.dao.UserDao
 import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton

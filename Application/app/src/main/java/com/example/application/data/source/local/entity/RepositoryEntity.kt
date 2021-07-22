@@ -16,7 +16,11 @@ data class RepositoryEntity(
     @ColumnInfo(name = "html_url")
     var url: String,
 
+    @ColumnInfo(name = "Downloaded")
+    val downloaded: Boolean = false,
+
     @Embedded
     val owner: Owner
+
 )
 
