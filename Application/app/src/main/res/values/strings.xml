@@ -18,4 +18,5 @@
     <string name="name">Name</string>
     <string name="download">Download</string>
     <string name="browser">browser</string>
+    <string name="downloaded_repositories">Downloaded Repositories</string>
 </resources>

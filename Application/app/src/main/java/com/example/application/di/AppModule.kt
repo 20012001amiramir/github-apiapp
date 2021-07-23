@@ -1,9 +1,6 @@
 package com.example.application.di
 
-import com.example.application.domain.usecase.RepositoryInteractor
-import com.example.application.domain.usecase.RepositoryUseCase
-import com.example.application.domain.usecase.UserInteractor
-import com.example.application.domain.usecase.UserUseCase
+import com.example.application.domain.usecase.*
 import dagger.Binds
 import dagger.Module
 
@@ -14,5 +11,8 @@ abstract class AppModule {
 
     @Binds
     abstract fun provideRepositoryUseCase(repositoryInteractor: RepositoryInteractor): RepositoryUseCase
+
+    @Binds
+    abstract fun provideDownloadRepositoryUseCase(downloadedRepositoryInteractor: DownloadedRepositoryInteractor): DownloadedRepositoryUseCase
 
 }

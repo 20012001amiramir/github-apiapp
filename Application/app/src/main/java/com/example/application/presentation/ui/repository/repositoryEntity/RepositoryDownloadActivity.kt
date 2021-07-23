@@ -8,7 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.application.App
 import com.example.application.databinding.ActivityRepositoryDownloadBinding
+import com.example.application.domain.model.DownloadRepositoryModel
+import com.example.application.domain.model.OwnerModel
 import com.example.application.presentation.ui.repository.RepositoryViewModelFactory
+import com.example.application.presentation.ui.repository.repositoryDownloaded.RepositoryDownloadViewModelFactory
+import com.example.application.presentation.viewmodel.DownloadedRepositoryViewModel
 import com.example.application.presentation.viewmodel.RepositoryViewModel
 import javax.inject.Inject
 
@@ -16,10 +20,11 @@ import javax.inject.Inject
 class RepositoryDownloadActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var factoryRepository: RepositoryViewModelFactory
-    private val viewModel: RepositoryViewModel by viewModels {
-        factoryRepository
+    lateinit var factoryDownloadRepository: RepositoryDownloadViewModelFactory
+    private val viewModel: DownloadedRepositoryViewModel by viewModels {
+        factoryDownloadRepository
     }
+
     private var url : String = ""
     private lateinit var binding: ActivityRepositoryDownloadBinding
 
@@ -33,7 +38,7 @@ class RepositoryDownloadActivity : AppCompatActivity() {
         val intent = intent
         val name = intent.getStringExtra("name")
         val urlX =  intent.getStringExtra("url")
-        //val ownerName = intent.getStringExtra("ownerName")
+        val ownerName = intent.getStringExtra("ownerName")
         url = "$urlX/archive/refs/heads/master.zip"
         binding.textV.text = name
         binding.browser.setOnClickListener {
@@ -42,6 +47,7 @@ class RepositoryDownloadActivity : AppCompatActivity() {
             startActivity(i)
         }
         binding.download.setOnClickListener {
+            viewModel.setData(DownloadRepositoryModel(name,url, OwnerModel(ownerName)))
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)

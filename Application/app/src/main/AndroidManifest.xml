@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Application">
-        <activity android:name=".presentation.ui.repository.repositoryEntity.RepositoryDownloadActivity"></activity>
+        <activity android:name=".presentation.ui.repository.repositoryEntity.RepositoryDownloadActivity" />
+        <activity android:name=".presentation.ui.repository.repositoryDownloaded.DownloadedRepositoriesActivity" />
         <activity
             android:name=".presentation.ui.user.UserActivity"
             android:exported="true">

@@ -4,5 +4,5 @@ import androidx.room.ColumnInfo
 
 data class Owner(
     @ColumnInfo(name = "login")
-    val login: String
+    val login: String?
 )

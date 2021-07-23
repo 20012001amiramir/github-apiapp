@@ -1,10 +1,12 @@
 package com.example.application.domain.utils
 
 import com.example.application.data.source.local.entity.Owner
+import com.example.application.data.source.local.entity.RepositoryDownload
 import com.example.application.data.source.local.entity.RepositoryEntity
 import com.example.application.data.source.local.entity.UserEntity
 import com.example.application.data.source.remote.response.repositories.RepositoryResponse
 import com.example.application.data.source.remote.response.user.UserResponse
+import com.example.application.domain.model.DownloadRepositoryModel
 import com.example.application.domain.model.OwnerModel
 import com.example.application.domain.model.Repository
 import com.example.application.domain.model.User
@@ -61,4 +63,26 @@ object DataMapper {
         }
         return userList
     }
+
+    fun mapDownloadRepositoryResponsesToEntities(input: List<RepositoryDownload>) : List<DownloadRepositoryModel>{
+        val userList = ArrayList<DownloadRepositoryModel>()
+        input.map {
+            val user = DownloadRepositoryModel(
+                name = it.name,
+                url = it.url,
+                owner = OwnerModel(it.owner.login)
+            )
+            userList.add(user)
+        }
+        return userList
+    }
+
+    fun mapRepositoryDownloadModelEntitiesToDomain(input: DownloadRepositoryModel): RepositoryDownload {
+        return RepositoryDownload(
+            name = input.name,
+            url = input.url,
+            owner = Owner(input.owner.login)
+        )
+    }
+
 }

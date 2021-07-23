@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.example.application.data.source.local.room.dao.RepositoryDao
 import com.example.application.data.source.local.room.dao.UserDao
 import com.example.application.data.source.local.room.UserDatabase
+import com.example.application.data.source.local.room.dao.RepositoryDownloadDao
+import com.example.application.domain.usecase.DownloadedRepositoryUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -25,4 +27,6 @@ class DatabaseModule {
     @Provides
     fun provideRepositoryDao(database: UserDatabase) : RepositoryDao = database.repositoryDao()
 
+    @Provides
+    fun provideDownloadRepositoryDao(database: UserDatabase) : RepositoryDownloadDao = database.repositoryDownloadDao()
 }
